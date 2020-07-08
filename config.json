@@ -1,0 +1,6 @@
+{
+    "token":"YOUR_SUPER_SECRET_BOT_TOKEN",
+    "owner": {
+        "id": "YOUR_ID"
+    }
+}
