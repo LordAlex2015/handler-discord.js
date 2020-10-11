@@ -22,7 +22,7 @@ module.exports = (client, message) => {
         return ;
     }
     if(command.perms !== 'everyone') {
-        if(!message.member.permission.has(command.perms)) {
+        if(!message.member.hasPermission(command.perms)) {
             return message.channel.send('You don\'t have required permission to use that command!')
         }
     }
