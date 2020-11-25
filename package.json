@@ -1,6 +1,6 @@
 {
   "name": "handler-discord",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Handler en Class pour Discord.js",
   "main": "main.js",
   "scripts": {
@@ -17,8 +17,9 @@
   },
   "homepage": "https://github.com/LordAlex2015/handler-discord.js#readme",
   "dependencies": {
-    "colors": "^1.4.0",
-    "discord.js": "^12.2.0",
-    "moment": "^2.27.0"
+    "colors": "latest",
+    "discord.js": "latest",
+    "moment": "latest",
+    "figlet": "latest"
   }
 }

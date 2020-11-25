@@ -4,15 +4,15 @@ const { token } = require('./config.json'),
  { Client, Collection } = require('discord.js'),
   { readdirSync } = require('fs'),
     { join } = require("path"),
-    {green,red, blue} = require('colors');
+    {green,red, blue} = require('colors'),
+    {text} = require('figlet');
 /*
   * Copyright 2020 © LordAlex2015
   * See LICENSE file
  */
 class Class extends Client {
     constructor(token) {
-        super({messageCacheMaxSize: 15});
-        this.bot = this;
+        super({messageCacheMaxSize: 15 /* Here you can add PARTIALS */});
         this.config = require('./config.json');
         this.maincolor = 11007;
         this.prefix = '!';
@@ -35,6 +35,51 @@ class Class extends Client {
         this.commands = new Collection();
         this._commandsHandler();
         this._eventsHandler();
+        //Custom Starting Message
+        text('Handler-Discord.js', {
+            font: "Standard"
+        }, function(err, data) {
+            if (err) {
+                console.log('Something went wrong...');
+                console.dir(err);
+                return;
+            }
+            const data2 = data;
+            text('By: ArviX', {
+            }, function(err, data) {
+                if (err) {
+                    console.log('Something went wrong...');
+                    console.dir(err);
+                    return;
+                }
+                console.log("================================================================================================================================"+"\n"+
+                    data2+"\n\n"+ data +"\n"+
+                    "================================================================================================================================"
+
+                );
+            });
+
+        });
+            process.on('unhandledRejection', error => {
+                if(error.code === 50007) return
+                console.error(green('✅ An Error has occured : ') + red(error.stack));
+                let details = `\`\`\`\nName : ${error.name}\nMessage : ${error.message}`
+                if (error.path) details += `\nPath : ${error.path}`
+                if (error.code) details += `\nError Code : ${error.code}`
+                if (error.method) details += `\nMethod : ${error.method}`
+                if (this.users) this.users.cache.get(this.config.owner.id).send({
+                    embed: {
+                        description: `🔺 **An Error has occured:**\n\`\`\`js\n${error}\`\`\``,
+                        color: this.maincolor,
+                        fields: [
+                            {
+                                name: "🔺 Details :",
+                                value: `${details}\`\`\``
+                            }
+                        ]
+                    }
+                })
+            });
     }
 
     _commandsHandler() {

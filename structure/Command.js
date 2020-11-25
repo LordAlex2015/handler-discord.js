@@ -7,5 +7,7 @@ module.exports = class Command {
         this.example = info.example || [];
         this.aliases = info.aliases || [];
         this.perms = info.perms || 'everyone';
+        this.botNotAllowed = info.botNotAllowed || true;
+        this.botPerms = info.botPerms || [];
     }
 };

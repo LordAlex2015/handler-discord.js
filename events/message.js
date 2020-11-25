@@ -4,7 +4,7 @@
   * See LICENSE file
  */
 module.exports = (client, message) => {
-    if (message.author.bot || !message.channel.guild) {
+    if (!message.channel.guild) {
         return ;
     }
 
@@ -21,11 +21,27 @@ module.exports = (client, message) => {
     if (!command) {
         return ;
     }
-    if(command.perms !== 'everyone') {
-        if(!message.member.hasPermission(command.perms)) {
-            return message.channel.send('You don\'t have required permission to use that command!')
+    if(command.botNotAllowed && message.author.bot) {
+        return;
+    }
+
+    if(command.perms === "owner") {
+        if(!client.config.owners.includes(message.author.id)) {
+            return message.channel.send('You don\'t have required permission to use that command!');
         }
     }
+     else if(command.perms !== 'everyone') {
+        if(!message.member.permission.has(command.perms)) {
+            return message.channel.send('You don\'t have required permission to use that command!');
+        }
+    }
+     if(command.botPerms !== []) {
+         for(botPerm of command.botPerms) {
+             if(!message.guild.members.cache.get(client.user.id).hasPermission(botPerm)) {
+                 return message.channel.send(`I don\'t have required permission to execute that command!\nMissing Permission: ${botPerm}`);
+             }
+         }
+     }
     /*
       * Copyright 2020 © LordAlex2015
       * See LICENSE file

@@ -2,5 +2,10 @@
     "token":"YOUR_SUPER_SECRET_BOT_TOKEN",
     "owner": {
         "id": "YOUR_ID"
-    }
+    },
+    "owners": [
+        "OWNER_1_ID",
+        "OWNER_2_ID",
+        "OWNER_3_ID"
+    ]
 }
