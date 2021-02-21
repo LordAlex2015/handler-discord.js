@@ -1,8 +1,5 @@
 'use strict';
-/*
-  * Copyright 2020 © LordAlex2015
-  * See LICENSE file
- */
+
 module.exports = (client, message) => {
     if (!message.channel.guild) {
         return ;
@@ -11,7 +8,6 @@ module.exports = (client, message) => {
     const data = message.content;
 
     const args = data.slice(client.prefix.length).trim().split(/ +/g);
-
 
     if (!data.startsWith(client.prefix)) {
         return;
@@ -38,14 +34,15 @@ module.exports = (client, message) => {
      if(command.botPerms !== []) {
          for(botPerm of command.botPerms) {
              if(!message.guild.members.cache.get(client.user.id).hasPermission(botPerm)) {
-                 return message.channel.send(`I don\'t have required permission to execute that command!\nMissing Permission: ${botPerm}`);
+                 let perms = []
+                 for(perm of command.botPerms) {
+                    perms.push(`\`${perm}\``);
+                 }
+                 return message.channel.send(`I don\'t have required permission to execute that command!\nMissing Permission: ${perms.join("\n")}`);
              }
          }
      }
-    /*
-      * Copyright 2020 © LordAlex2015
-      * See LICENSE file
-     */
+
     try {
         command.run(client, message, args)
     } catch (err) {

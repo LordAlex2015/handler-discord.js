@@ -1,8 +1,5 @@
 'use strict';
-/*
-  * Copyright 2020 © LordAlex2015
-  * See LICENSE file
- */
+
 const Command = require("../../structure/Command.js");
 const moment = require('moment')
 class Userinfo extends Command {
@@ -10,24 +7,19 @@ class Userinfo extends Command {
         super({
             name: 'userinfo',
             category: 'utils',
-            description: 'Cette commande donne des informations sur des utilisateurs !',
+            description: 'Get user stats',
             usage: 'userinfo [@user]',
             example: ['userinfo', 'userinfo @user'],
             aliases: ['ui']
         });
     }
-    /*
-      * Copyright 2020 © LordAlex2015
-      * See LICENSE file
-     */
     async run(client, message) {
         const membre = message.mentions.members.first() || message.author;
-        // if (!membre) { return message.channel.send('Veuillez mentionner un utilisateur !'); }
 
         await message.channel.send({
             embed: {
-                color: 0xe43333,
-                title: `Statistiques du l'utilisateur **${membre.tag}**`,
+                color: client.colors.default,
+                title: `Stats of **${membre.tag}**`,
                 thumbnail: {
                     url: membre.displayAvatarURL()
                 },
@@ -49,9 +41,6 @@ class Userinfo extends Command {
 
     }
 }
-/*
-  * Copyright 2020 © LordAlex2015
-  * See LICENSE file
- */
+
 
 module.exports = new Userinfo();

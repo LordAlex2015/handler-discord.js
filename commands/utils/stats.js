@@ -2,16 +2,13 @@
 
 const Command = require("../../structure/Command.js");
 const { loadavg, cpus, totalmem } = require('os');
-/*
-  * Copyright 2020 © LordAlex2015
-  * See LICENSE file
- */
+
 class Stats extends Command {
     constructor() {
         super({
             name: 'stats',
             category: 'utils',
-            description: 'Cette commande donne les stats du bot !',
+            description: 'Get bot stats',
             usage: 'stats',
             example: ['stats'],
             aliases: ['botinfo','botstats']
@@ -20,14 +17,11 @@ class Stats extends Command {
 
     async run(client, message) {
         let cpuCores = cpus().length;
-        /*
-          * Copyright 2020 © LordAlex2015
-          * See LICENSE file
-         */
+
         await message.channel.send({
             embed: {
                 title: client.user.username,
-                color: client.maincolor,
+                color: client.colors.default,
                 timestamp: new Date(),
                 footer: {
                     icon_url: client.user.displayAvatarURL(),
@@ -57,9 +51,5 @@ class Stats extends Command {
         });
     }
 }
-/*
-  * Copyright 2020 © LordAlex2015
-  * See LICENSE file
- */
 
 module.exports = new Stats;

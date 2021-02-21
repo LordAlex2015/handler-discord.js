@@ -1,7 +1,7 @@
 {
   "name": "handler-discord",
-  "version": "2.0.0",
-  "description": "Handler en Class pour Discord.js",
+  "version": "2..0",
+  "description": "Handler in Class for Discord.js",
   "main": "main.js",
   "scripts": {
     "test": "node main"
@@ -19,7 +19,7 @@
   "dependencies": {
     "colors": "latest",
     "discord.js": "latest",
-    "moment": "latest",
-    "figlet": "latest"
+    "figlet": "^1.5.0",
+    "moment": "latest"
   }
 }

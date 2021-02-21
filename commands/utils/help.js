@@ -2,10 +2,6 @@
 
 const Command = require("../../structure/Command.js");
 
-/*
-  * Copyright 2020 © LordAlex2015
-  * See LICENSE file
- */
 class Help extends Command {
     constructor() {
         super({
@@ -18,15 +14,11 @@ class Help extends Command {
         });
     }
 
-    /*
-      * Copyright 2020 © LordAlex2015
-      * See LICENSE file
-     */
     async run(client, message, args) {
         if (!args[1]) {
             await message.channel.send({
                 embed: {
-                    color: client.maincolor,
+                    color: client.colors.default,
                     title: `Commands of ${client.user.username}`,
                     thumbnail: {
                         url: 'https://i.ibb.co/8KYCKJd/info.png'
@@ -46,10 +38,7 @@ class Help extends Command {
                 }
             })
         } else if (args[1]) {
-            /*
-              * Copyright 2020 © LordAlex2015
-              * See LICENSE file
-             */
+
             const command = client.commands.find(cmd => cmd.aliases.includes(args[1])) || client.commands.get(args[1]);
             if (!command) return message.channel.send(`This command is invalid`);
             let send = "";
@@ -58,7 +47,7 @@ class Help extends Command {
             })
             await message.channel.send({
                 embed: {
-                    color: client.maincolor,
+                    color: client.colors.default,
                     author: {
                         name: `Help: Command ` + args[1],
                         icon_url: message.author.displayAvatarURL()
@@ -90,9 +79,5 @@ class Help extends Command {
         }
     }
 }
-/*
-  * Copyright 2020 © LordAlex2015
-  * See LICENSE file
- */
 
 module.exports = new Help;
