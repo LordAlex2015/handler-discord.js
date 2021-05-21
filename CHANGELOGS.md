@@ -1,5 +1,12 @@
 # Changelogs
 
+## V2.2
+- Removed - `reload-cmd` command 
+- Removed - `reload-event` command
+- Added - `reload` command
+- Added - Reload all commands function
+- Added - Reload all events function
+
 ## V2.1
 - Optimised - Main.js (Reorganisation)
 - Added - `reload-cmd` command (Function in main.js (`client.reloadCommand(commandName)`))

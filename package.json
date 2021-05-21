@@ -1,6 +1,6 @@
 {
   "name": "handler-discord",
-  "version": "2..0",
+  "version": "2.2.0",
   "description": "Handler in Class for Discord.js",
   "main": "main.js",
   "scripts": {

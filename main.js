@@ -74,6 +74,43 @@ class Class extends Client {
                 resolve(`> Event named: \`${reload_event}\` not found`)
             })
         }
+        this.reloadAllCommands = function() {
+            return new Promise((resolve) => {
+                let count = 0;
+                const folders = readdirSync(join(__dirname, "commands"));
+                for (let i = 0; i < folders.length; i++) {
+                    const commands = readdirSync(join(__dirname, "commands", folders[i]));
+                    count = count + commands.length;
+                    for(const c of commands){
+                        try {
+                            this.reloadCommand(c.replace('.js',''));
+                        } catch (error) {
+                            console.log(`${red('[Commands Reload]')} Failed to reload command ${c}: ${error.stack || error}`)
+                            throw new Error(`${red('[Commands Reload]')} Failed to load event ${e}: ${error.stack || error}`)
+                        }
+                    }
+                }
+                console.log(`${green('[Commands Reload]')} Reloaded ${this.commands.size}/${count} commands`);
+                resolve(`> Reloaded \`${this.commands.size}\`/\`${count}\` commands`)
+            })
+        }
+        this.reloadAllEvents = function() {
+            return new Promise((resolve) => {
+                let count = 0;
+                const files = readdirSync(join(__dirname, "events"));
+                files.forEach((e) => {
+                    try {
+                        count++;
+                        const fileName = e.split('.')[0];
+                        this.reloadEvent(fileName);
+                    } catch (error) {
+                        throw new Error(`${red('[Events Reload]')} Failed to load event ${e}: ${error.stack || error}`)
+                    }
+                });
+                console.log(`${green('[Events Reload]')} Loaded ${count}/${files.length} events`);
+                resolve(`> Reloaded \`${count}\`/\`${files.length}\` events`)
+            })
+        }
         try {
             this.launch().then(() => { console.log(blue('All is launched, Connecting to Discord..')); })
         } catch (e) {
